@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MOONMEME - The Next Generation Meme Coin</title>
+    <title>EXOTIC MEME - The Next Generation Meme Coin</title>
     
     <!-- Meta Tags for SEO -->
-    <meta name="description" content="MOONMEME is the ultimate Web3 meme coin with real utility, staking rewards, and a vibrant community. Join the moon mission today!">
-    <meta name="keywords" content="meme coin, cryptocurrency, web3, blockchain, ethereum, solana, token, defi, staking">
+    <meta name="description" content="EXOTIC MEME is the ultimate Web3 meme coin with real utility, staking rewards, and a vibrant community. Join the moon mission today!">
+    <meta name="keywords" content="exotic meme, meme coin, cryptocurrency, web3, blockchain, ethereum, solana, token, defi, staking">
     <meta name="author" content="Exotic Development">
     
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="MOONMEME - The Next Generation Meme Coin">
+    <meta property="og:title" content="EXOTIC MEME - The Next Generation Meme Coin">
     <meta property="og:description" content="Join the most exciting meme coin revolution with real utility and community rewards.">
     <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
-    <meta property="og:url" content="https://moonmeme.io">
+    <meta property="og:url" content="https://exoticmeme.io">
     <meta property="og:type" content="website">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MOONMEME - The Next Generation Meme Coin">
+    <meta name="twitter:title" content="EXOTIC MEME - The Next Generation Meme Coin">
     <meta name="twitter:description" content="Join the most exciting meme coin revolution with real utility and community rewards.">
     <meta name="twitter:image" content="https://yourdomain.com/twitter-image.jpg">
     
@@ -100,56 +100,340 @@
             z-index: -1;
         }
 
-        /* Loading Screen */
-        .loader {
+        /* ========== IMPROVED LOADING SCREEN (PLASHSCREEN) ========== */
+        .exotic-loader {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--dark);
+            background: radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.3) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 107, 107, 0.3) 0%, transparent 50%),
+                        var(--dark);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            transition: opacity 0.5s, visibility 0.5s;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                        visibility 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .loader.hidden {
+        .exotic-loader.hidden {
             opacity: 0;
             visibility: hidden;
         }
 
-        .loader-content {
-            text-align: center;
-        }
-
-        .loader-coin {
-            width: 100px;
-            height: 100px;
-            animation: spin 2s linear infinite;
-            margin-bottom: 20px;
-        }
-
-        .loader-coin svg {
+        /* Animated Background Particles */
+        .loader-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            filter: drop-shadow(0 0 30px var(--primary));
+            overflow: hidden;
         }
 
-        @keyframes spin {
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: floatParticle 20s linear infinite;
+        }
+
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main Content */
+        .loader-content {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            animation: contentAppear 1s ease-out;
+        }
+
+        @keyframes contentAppear {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* 3D Coin Container */
+        .coin-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .coin-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: spin3D 3s infinite linear;
+            filter: drop-shadow(0 0 30px rgba(138, 43, 226, 0.5));
+        }
+
+        @keyframes spin3D {
+            0% { transform: rotateY(0deg) rotateX(10deg); }
+            100% { transform: rotateY(360deg) rotateX(10deg); }
+        }
+
+        .coin-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #8A2BE2, #FF6B6B);
+            border: 4px solid #FFD700;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.5);
+        }
+
+        .coin-face.front {
+            transform: rotateY(0deg);
+        }
+
+        .coin-face.back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #FF6B6B, #8A2BE2);
+        }
+
+        .coin-face i {
+            color: #FFD700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Glow Rings */
+        .ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--primary);
+            border-right-color: var(--secondary);
+            border-bottom-color: var(--accent);
+            border-left-color: var(--success);
+            animation: ringRotate 2s linear infinite;
+        }
+
+        .ring-1 {
+            width: 220px;
+            height: 220px;
+            animation-duration: 3s;
+        }
+
+        .ring-2 {
+            width: 260px;
+            height: 260px;
+            animation-duration: 4s;
+            animation-direction: reverse;
+        }
+
+        .ring-3 {
+            width: 300px;
+            height: 300px;
+            animation-duration: 5s;
+            filter: blur(2px);
+        }
+
+        @keyframes ringRotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Brand Text with Letter Animation */
+        .brand-text {
+            font-size: 48px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .brand-text span {
+            display: inline-block;
+            animation: letterFloat 2s ease-in-out infinite;
+            animation-delay: calc(0.1s * var(--i));
+        }
+
+        @keyframes letterFloat {
+            0%, 100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-10px);
+                opacity: 0.8;
+            }
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, 
+                #8A2BE2 0%, 
+                #FF6B6B 25%, 
+                #FFD700 50%, 
+                #FF6B6B 75%, 
+                #8A2BE2 100%);
+            background-size: 300% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #8A2BE2;
+            animation: gradientShift 3s linear infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Tagline */
+        .tagline {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            animation: fadeInOut 2s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin: 30px auto 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, 
+                var(--primary), 
+                var(--secondary), 
+                var(--accent), 
+                var(--primary));
+            background-size: 300% 100%;
+            border-radius: 4px;
+            animation: progress 2s ease-in-out forwards,
+                       gradientShift 2s linear infinite;
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            20% { width: 20%; }
+            40% { width: 40%; }
+            60% { width: 60%; }
+            80% { width: 80%; }
+            100% { width: 100%; }
+        }
+
+        /* Percentage Counter */
+        .percentage {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 15px;
+            color: var(--primary);
+            animation: pulse 1s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .float-item {
+            position: absolute;
+            font-size: 24px;
+            color: rgba(138, 43, 226, 0.2);
+            animation: floatItem 10s linear infinite;
+        }
+
+        @keyframes floatItem {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Shine Effect */
+        .shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shineRotate 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shineRotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        .loader-text {
-            font-size: 24px;
-            font-weight: 800;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
-        }
+        /* ========== MAIN CONTENT STYLES ========== */
 
         /* Navigation */
         .navbar {
@@ -200,6 +484,8 @@
         .logo-text {
             background: var(--gradient-1);
             -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             -webkit-text-fill-color: transparent;
         }
 
@@ -316,6 +602,8 @@
         .hero-title span {
             background: var(--gradient-1);
             -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
@@ -445,6 +733,8 @@
         .section-title span {
             background: var(--gradient-1);
             -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             -webkit-text-fill-color: transparent;
         }
 
@@ -1059,6 +1349,10 @@
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .brand-text {
+                font-size: 36px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -1158,6 +1452,53 @@
                 width: 100%;
                 border-radius: 50px;
             }
+
+            .brand-text {
+                font-size: 28px;
+                letter-spacing: 4px;
+            }
+            
+            .coin-container {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .progress-container {
+                width: 250px;
+            }
+            
+            .ring-1 {
+                width: 170px;
+                height: 170px;
+            }
+            
+            .ring-2 {
+                width: 200px;
+                height: 200px;
+            }
+            
+            .ring-3 {
+                width: 230px;
+                height: 230px;
+            }
+        }
+
+        /* Reduced Motion Preference */
+        @media (prefers-reduced-motion: reduce) {
+            .coin-3d,
+            .ring,
+            .gradient-text,
+            .tagline,
+            .float-item,
+            .shine,
+            .brand-text span,
+            .floating-coin {
+                animation: none;
+            }
+            
+            .progress-bar {
+                animation: progress 2s ease-in-out forwards;
+            }
         }
     </style>
 </head>
@@ -1169,24 +1510,67 @@
     <!-- Particles Background -->
     <div id="particles-js"></div>
 
-    <!-- Loading Screen -->
-    <div class="loader" id="loader">
-        <div class="loader-content">
-            <div class="loader-coin">
-                <svg viewBox="0 0 100 100">
-                    <defs>
-                        <linearGradient id="coinGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#8A2BE2;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#FF6B6B;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <circle cx="50" cy="50" r="45" fill="url(#coinGradient)" stroke="#FFD700" stroke-width="3"/>
-                    <circle cx="50" cy="50" r="35" fill="none" stroke="#FFD700" stroke-width="2" stroke-dasharray="6 6"/>
-                    <text x="50" y="70" text-anchor="middle" fill="#FFD700" font-size="40" font-weight="900">🚀</text>
-                </svg>
-            </div>
-            <div class="loader-text">MOONMEME</div>
+    <!-- IMPROVED LOADING SCREEN (PLASHSCREEN) -->
+    <div class="exotic-loader" id="exoticLoader">
+        <!-- Background Particles -->
+        <div class="loader-particles" id="particles"></div>
+        
+        <!-- Floating Elements -->
+        <div class="floating-elements">
+            <div class="float-item" style="left: 10%; animation-delay: 0s;">🚀</div>
+            <div class="float-item" style="left: 30%; animation-delay: 2s;">🌙</div>
+            <div class="float-item" style="left: 50%; animation-delay: 4s;">💎</div>
+            <div class="float-item" style="left: 70%; animation-delay: 6s;">✨</div>
+            <div class="float-item" style="left: 90%; animation-delay: 8s;">💰</div>
         </div>
+
+        <!-- Main Content -->
+        <div class="loader-content">
+            <!-- 3D Coin with Rings -->
+            <div class="coin-container">
+                <div class="ring ring-1"></div>
+                <div class="ring ring-2"></div>
+                <div class="ring ring-3"></div>
+                
+                <div class="coin-3d" id="coin3D">
+                    <div class="coin-face front">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="coin-face back">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brand Text with Letter Animation -->
+            <div class="brand-text gradient-text">
+                <span style="--i:1">E</span>
+                <span style="--i:2">X</span>
+                <span style="--i:3">O</span>
+                <span style="--i:4">T</span>
+                <span style="--i:5">I</span>
+                <span style="--i:6">C</span>
+                <span style="--i:7">&nbsp;</span>
+                <span style="--i:8">M</span>
+                <span style="--i:9">E</span>
+                <span style="--i:10">M</span>
+                <span style="--i:11">E</span>
+            </div>
+
+            <!-- Tagline -->
+            <div class="tagline">The Future of Meme Coins</div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <!-- Percentage Counter -->
+            <div class="percentage" id="percentage">0%</div>
+        </div>
+
+        <!-- Shine Effect -->
+        <div class="shine"></div>
     </div>
 
     <!-- Navigation -->
@@ -1195,7 +1579,7 @@
             <div class="logo-icon">
                 <span>🚀</span>
             </div>
-            <span class="logo-text">MOONMEME</span>
+            <span class="logo-text">EXOTIC MEME</span>
         </div>
         
         <div class="menu-toggle" id="menuToggle">
@@ -1228,7 +1612,7 @@
                 Is Here
             </h1>
             <p class="hero-subtitle">
-                MOONMEME combines the viral power of meme coins with real utility. 
+                EXOTIC MEME combines the viral power of meme coins with real utility. 
                 Stake, earn, and be part of the most exciting community in crypto.
             </p>
             
@@ -1281,14 +1665,14 @@
     <!-- Marquee -->
     <div class="marquee">
         <div class="marquee-content">
-            <span><i class="fas fa-rocket"></i> MOONMEME</span>
-            <span><i class="fas fa-coins"></i> $MOON</span>
+            <span><i class="fas fa-rocket"></i> EXOTIC MEME</span>
+            <span><i class="fas fa-coins"></i> $EXOTIC</span>
             <span><i class="fas fa-fire"></i> 100x Potential</span>
             <span><i class="fas fa-users"></i> 50K+ Holders</span>
             <span><i class="fas fa-chart-line"></i> Launching Soon</span>
             <span><i class="fas fa-gem"></i> Diamond Hands</span>
-            <span><i class="fas fa-rocket"></i> MOONMEME</span>
-            <span><i class="fas fa-coins"></i> $MOON</span>
+            <span><i class="fas fa-rocket"></i> EXOTIC MEME</span>
+            <span><i class="fas fa-coins"></i> $EXOTIC</span>
             <span><i class="fas fa-fire"></i> 100x Potential</span>
             <span><i class="fas fa-users"></i> 50K+ Holders</span>
             <span><i class="fas fa-chart-line"></i> Launching Soon</span>
@@ -1299,10 +1683,10 @@
     <!-- About Section -->
     <section class="about" id="about">
         <div class="section-header" data-aos="fade-up">
-            <div class="section-badge">About MOONMEME</div>
+            <div class="section-badge">About EXOTIC MEME</div>
             <h2 class="section-title">More Than Just <span>a Meme</span></h2>
             <p class="section-subtitle">
-                MOONMEME isn't just another dog coin. We're building a complete ecosystem with real utility.
+                EXOTIC MEME isn't just another dog coin. We're building a complete ecosystem with real utility.
             </p>
         </div>
         
@@ -1312,15 +1696,15 @@
                     <svg viewBox="0 0 200 200">
                         <circle cx="100" cy="100" r="90" fill="url(#coinGradient2)" opacity="0.5"/>
                         <circle cx="100" cy="100" r="70" fill="url(#coinGradient2)"/>
-                        <text x="100" y="120" text-anchor="middle" fill="white" font-size="60" font-weight="900">$🌙</text>
+                        <text x="100" y="120" text-anchor="middle" fill="white" font-size="60" font-weight="900">$E</text>
                     </svg>
                 </div>
             </div>
             
             <div class="about-content" data-aos="fade-left">
-                <h3 style="font-size: 32px; margin-bottom: 20px;">The Story Behind <span style="color: var(--primary);">MOONMEME</span></h3>
+                <h3 style="font-size: 32px; margin-bottom: 20px;">The Story Behind <span style="color: var(--primary);">EXOTIC MEME</span></h3>
                 <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px;">
-                    Launched in 2024, MOONMEME started as a simple idea: create a meme coin that actually does something. 
+                    Launched in 2024, EXOTIC MEME started as a simple idea: create a meme coin that actually does something. 
                     We combined the viral marketing power of meme coins with real DeFi utility, creating a token that 
                     rewards holders, funds community projects, and builds a sustainable ecosystem.
                 </p>
@@ -1352,7 +1736,7 @@
             <div class="section-badge">Tokenomics</div>
             <h2 class="section-title">Fair & <span>Transparent</span></h2>
             <p class="section-subtitle">
-                Total Supply: 1,000,000,000 $MOON
+                Total Supply: 1,000,000,000 $EXOTIC
             </p>
         </div>
         
@@ -1397,7 +1781,7 @@
             <div class="chart-bar">
                 <div class="chart-label">
                     <span>Liquidity Pool (40%)</span>
-                    <span>400M $MOON</span>
+                    <span>400M $EXOTIC</span>
                 </div>
                 <div class="chart-progress">
                     <div class="chart-fill" style="width: 40%"></div>
@@ -1407,7 +1791,7 @@
             <div class="chart-bar">
                 <div class="chart-label">
                     <span>Community Rewards (30%)</span>
-                    <span>300M $MOON</span>
+                    <span>300M $EXOTIC</span>
                 </div>
                 <div class="chart-progress">
                     <div class="chart-fill" style="width: 30%"></div>
@@ -1417,7 +1801,7 @@
             <div class="chart-bar">
                 <div class="chart-label">
                     <span>Marketing (15%)</span>
-                    <span>150M $MOON</span>
+                    <span>150M $EXOTIC</span>
                 </div>
                 <div class="chart-progress">
                     <div class="chart-fill" style="width: 15%"></div>
@@ -1427,7 +1811,7 @@
             <div class="chart-bar">
                 <div class="chart-label">
                     <span>Development (10%)</span>
-                    <span>100M $MOON</span>
+                    <span>100M $EXOTIC</span>
                 </div>
                 <div class="chart-progress">
                     <div class="chart-fill" style="width: 10%"></div>
@@ -1437,7 +1821,7 @@
             <div class="chart-bar">
                 <div class="chart-label">
                     <span>Team (5%)</span>
-                    <span>50M $MOON</span>
+                    <span>50M $EXOTIC</span>
                 </div>
                 <div class="chart-progress">
                     <div class="chart-fill" style="width: 5%"></div>
@@ -1450,7 +1834,7 @@
     <section class="features">
         <div class="section-header" data-aos="fade-up">
             <div class="section-badge">Features</div>
-            <h2 class="section-title">Why Choose <span>MOONMEME</span></h2>
+            <h2 class="section-title">Why Choose <span>EXOTIC MEME</span></h2>
             <p class="section-subtitle">
                 We're building more than just a token - we're building an ecosystem.
             </p>
@@ -1460,7 +1844,7 @@
             <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="feature-icon"><i class="fas fa-lock"></i></div>
                 <h3 class="feature-title">Staking Rewards</h3>
-                <p class="feature-desc">Earn passive income by staking your $MOON tokens. Up to 20% APY.</p>
+                <p class="feature-desc">Earn passive income by staking your $EXOTIC tokens. Up to 20% APY.</p>
             </div>
             
             <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
@@ -1478,13 +1862,13 @@
             <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
                 <div class="feature-icon"><i class="fas fa-gamepad"></i></div>
                 <h3 class="feature-title">NFT Game</h3>
-                <p class="feature-desc">Play-to-earn game launching Q3 2024 with $MOON rewards.</p>
+                <p class="feature-desc">Play-to-earn game launching Q3 2024 with $EXOTIC rewards.</p>
             </div>
             
             <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
                 <div class="feature-icon"><i class="fas fa-credit-card"></i></div>
-                <h3 class="feature-title">MOON Card</h3>
-                <p class="feature-desc">Spend your $MOON anywhere with our upcoming crypto debit card.</p>
+                <h3 class="feature-title">EXOTIC Card</h3>
+                <p class="feature-desc">Spend your $EXOTIC anywhere with our upcoming crypto debit card.</p>
             </div>
             
             <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
@@ -1537,7 +1921,7 @@
                 <h3 class="roadmap-title">Q3 2024 - Expansion</h3>
                 <ul class="roadmap-items">
                     <li><i class="fas fa-hourglass"></i> P2E Game Launch</li>
-                    <li><i class="fas fa-hourglass"></i> MOON Card Beta</li>
+                    <li><i class="fas fa-hourglass"></i> EXOTIC Card Beta</li>
                     <li><i class="fas fa-hourglass"></i> Tier-1 CEX Listings</li>
                     <li><i class="fas fa-hourglass"></i> 100,000+ Holders</li>
                     <li><i class="fas fa-hourglass"></i> DAO Governance</li>
@@ -1548,7 +1932,7 @@
                 <div class="roadmap-phase">Phase 4</div>
                 <h3 class="roadmap-title">Q4 2024 - Moon</h3>
                 <ul class="roadmap-items">
-                    <li><i class="fas fa-hourglass"></i> MOON Ecosystem</li>
+                    <li><i class="fas fa-hourglass"></i> EXOTIC Ecosystem</li>
                     <li><i class="fas fa-hourglass"></i> Cross-Chain Bridge</li>
                     <li><i class="fas fa-hourglass"></i> Global Merch Store</li>
                     <li><i class="fas fa-hourglass"></i> 500,000+ Holders</li>
@@ -1562,9 +1946,9 @@
     <section class="team" id="team">
         <div class="section-header" data-aos="fade-up">
             <div class="section-badge">Team</div>
-            <h2 class="section-title">Meet the <span>Masters of the Moon</span></h2>
+            <h2 class="section-title">Meet the <span>Masters of EXOTIC</span></h2>
             <p class="section-subtitle">
-                Experienced team dedicated to taking MOONMEME to the moon.
+                Experienced team dedicated to taking EXOTIC MEME to the moon.
             </p>
         </div>
         
@@ -1573,7 +1957,7 @@
                 <div class="team-image">
                     <img src="https://via.placeholder.com/150" alt="Team Member">
                 </div>
-                <h3 class="team-name">Alex Moon</h3>
+                <h3 class="team-name">Alex Exotic</h3>
                 <div class="team-role">CEO & Founder</div>
                 <p style="color: var(--text-secondary); margin-bottom: 15px;">10+ years in crypto, former DeFi protocol lead.</p>
                 <div class="team-social">
@@ -1631,7 +2015,7 @@
     <section class="how-to-buy" id="buy">
         <div class="section-header" data-aos="fade-up">
             <div class="section-badge">How to Buy</div>
-            <h2 class="section-title">Get Your <span>$MOON</span> Tokens</h2>
+            <h2 class="section-title">Get Your <span>$EXOTIC</span> Tokens</h2>
             <p class="section-subtitle">
                 Ready to join the moon mission? Follow these simple steps.
             </p>
@@ -1655,7 +2039,7 @@
             <div class="step-card" data-aos="fade-up" data-aos-delay="300">
                 <div class="step-number">3</div>
                 <h3 class="step-title">Swap on Uniswap</h3>
-                <p class="step-desc">Go to Uniswap, connect wallet, and swap for $MOON tokens.</p>
+                <p class="step-desc">Go to Uniswap, connect wallet, and swap for $EXOTIC tokens.</p>
                 <a href="#" class="step-link">Trade Now <i class="fas fa-arrow-right"></i></a>
             </div>
         </div>
@@ -1663,10 +2047,10 @@
 
     <!-- CTA Section -->
     <div class="cta" data-aos="zoom-in">
-        <h2 class="cta-title">Ready to Join the Moon Mission?</h2>
+        <h2 class="cta-title">Ready to Join the EXOTIC Mission?</h2>
         <p class="cta-subtitle">Don't miss out on the next 100x meme coin. Join thousands of holders already on the moon journey.</p>
         <div class="cta-buttons">
-            <a href="#" class="btn btn-primary">Buy $MOON Now</a>
+            <a href="#" class="btn btn-primary">Buy $EXOTIC Now</a>
             <a href="#" class="btn btn-outline">Join Telegram</a>
         </div>
     </div>
@@ -1679,7 +2063,7 @@
                     <div class="logo-icon">
                         <span>🚀</span>
                     </div>
-                    <span class="logo-text">MOONMEME</span>
+                    <span class="logo-text">EXOTIC MEME</span>
                 </div>
                 <p>The next generation meme coin with real utility. Join our community and be part of the moon mission.</p>
                 <div class="footer-social">
@@ -1733,7 +2117,7 @@
         </div>
         
         <div class="footer-bottom">
-            <p>&copy; 2024 MOONMEME. All rights reserved. | Developed by <a href="https://t.me/Exoticco_BDM" style="color: var(--primary);">@Exoticco_BDM</a></p>
+            <p>&copy; 2024 EXOTIC MEME. All rights reserved. | Developed by <a href="https://t.me/Exoticco_BDM" style="color: var(--primary);">@Exoticco_BDM</a></p>
         </div>
     </footer>
 
@@ -1749,14 +2133,118 @@
             offset: 100
         });
 
-        // Loading Screen
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('loader').classList.add('hidden');
-            }, 1500);
-        });
+        // ========== IMPROVED LOADING SCREEN FUNCTIONS ==========
+        
+        // Create particles for loader background
+        function createLoaderParticles() {
+            const particlesContainer = document.querySelector('.loader-particles');
+            if (!particlesContainer) return;
+            
+            const particleCount = 50;
 
-        // Particles Background
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random properties
+                const size = Math.random() * 6 + 2;
+                const left = Math.random() * 100;
+                const delay = Math.random() * 20;
+                const duration = Math.random() * 10 + 10;
+                const color = `hsl(${Math.random() * 60 + 260}, 70%, 50%)`; // Purple to pink range
+
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = left + '%';
+                particle.style.animationDelay = delay + 's';
+                particle.style.animationDuration = duration + 's';
+                particle.style.background = color;
+                particle.style.boxShadow = `0 0 ${size * 2}px ${color}`;
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Update percentage counter
+        function updatePercentage() {
+            const percentageElement = document.getElementById('percentage');
+            const progressBar = document.getElementById('progressBar');
+            let percentage = 0;
+
+            const interval = setInterval(() => {
+                percentage += 1;
+                if (percentageElement) {
+                    percentageElement.textContent = percentage + '%';
+                }
+                
+                if (percentage >= 100) {
+                    clearInterval(interval);
+                    if (percentageElement) {
+                        percentageElement.textContent = '100%';
+                    }
+                    
+                    // Add completion effect
+                    const coin3D = document.getElementById('coin3D');
+                    if (coin3D) {
+                        coin3D.style.animation = 'spin3D 0.5s ease-out';
+                        setTimeout(() => {
+                            coin3D.style.animation = 'spin3D 3s infinite linear';
+                        }, 500);
+                    }
+                }
+            }, 20); // 2 seconds total for 100 steps (20ms * 100 = 2000ms)
+        }
+
+        // Interactive coin spin on click
+        function initCoinClick() {
+            const coin = document.getElementById('coin3D');
+            if (coin) {
+                coin.addEventListener('click', () => {
+                    coin.style.animation = 'none';
+                    coin.offsetHeight; // Trigger reflow
+                    coin.style.animation = 'spin3D 1s ease-out';
+                    
+                    setTimeout(() => {
+                        coin.style.animation = 'spin3D 3s infinite linear';
+                    }, 1000);
+                });
+            }
+        }
+
+        // Hide loader when page is loaded
+        function initLoader() {
+            // Create particles
+            createLoaderParticles();
+            
+            // Update percentage counter
+            updatePercentage();
+            
+            // Initialize coin click
+            initCoinClick();
+
+            // Hide loader after page load
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const loader = document.getElementById('exoticLoader');
+                    if (loader) {
+                        loader.classList.add('hidden');
+                    }
+                }, 2500); // Show loader for at least 2.5 seconds
+            });
+
+            // Fallback: hide after 5 seconds max
+            setTimeout(() => {
+                const loader = document.getElementById('exoticLoader');
+                if (loader && !loader.classList.contains('hidden')) {
+                    loader.classList.add('hidden');
+                }
+            }, 5000);
+        }
+
+        // Initialize loader when DOM is ready
+        document.addEventListener('DOMContentLoaded', initLoader);
+
+        // Particles Background for main site
         particlesJS('particles-js', {
             particles: {
                 number: {
@@ -1851,34 +2339,44 @@
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
 
-        menuToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            menuToggle.querySelector('i').classList.toggle('fa-bars');
-            menuToggle.querySelector('i').classList.toggle('fa-times');
-        });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuToggle.querySelector('i').classList.add('fa-bars');
-                menuToggle.querySelector('i').classList.remove('fa-times');
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('fa-bars');
+                    icon.classList.toggle('fa-times');
+                }
             });
-        });
+
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    const icon = menuToggle.querySelector('i');
+                    if (icon) {
+                        icon.classList.add('fa-bars');
+                        icon.classList.remove('fa-times');
+                    }
+                });
+            });
+        }
 
         // Custom Cursor
         const cursor = document.querySelector('.cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX + 'px';
-                cursorFollower.style.top = e.clientY + 'px';
-            }, 50);
-        });
+        if (cursor && cursorFollower) {
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+                
+                setTimeout(() => {
+                    cursorFollower.style.left = e.clientX + 'px';
+                    cursorFollower.style.top = e.clientY + 'px';
+                }, 50);
+            });
+        }
 
         // Smooth Scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1895,14 +2393,17 @@
         });
 
         // Newsletter Form
-        document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = this.querySelector('input').value;
-            
-            // API call would go here
-            alert('Thanks for subscribing! Check your email for confirmation.');
-            this.reset();
-        });
+        const newsletterForm = document.getElementById('newsletterForm');
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input').value;
+                
+                // API call would go here
+                alert('Thanks for subscribing! Check your email for confirmation.');
+                this.reset();
+            });
+        }
 
         // Add hover effect to cards
         document.querySelectorAll('.token-card, .feature-card, .step-card, .team-card, .roadmap-card').forEach(card => {
